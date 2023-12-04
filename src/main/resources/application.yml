@@ -1,0 +1,16 @@
+spring:
+  data:
+    elasticsearch:
+      uris: http://127.0.0.1:9200
+
+logging:
+  level:
+    org:
+      elasticsearch:
+        client: TRACE
+      springframework:
+        data:
+          elasticsearch:
+            core: DEBUG
+
+
