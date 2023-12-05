@@ -8,12 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.elasticsearch.DataElasticsearchTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +18,9 @@ import java.util.List;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@DataElasticsearchTest
+@SpringBootTest
 @ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {ElasticsearchConfig.class})
 public class EcommerceRepositoryTests {
   Logger log = LoggerFactory.getLogger(EcommerceRepositoryTests.class);
   @Autowired

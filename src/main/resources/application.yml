@@ -6,11 +6,8 @@ spring:
 logging:
   level:
     org:
-      elasticsearch:
-        client: TRACE
       springframework:
         data:
           elasticsearch:
-            core: DEBUG
-
-
+            client:
+              WIRE: TRACE
