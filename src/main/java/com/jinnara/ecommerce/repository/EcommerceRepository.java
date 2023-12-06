@@ -1,5 +1,8 @@
-package com.jinnara.ecommerce.repository.entity;
+package com.jinnara.ecommerce.repository;
 
+import com.jinnara.ecommerce.repository.entity.Ecommerce;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
@@ -8,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface EcommerceRepository extends ElasticsearchRepository<Ecommerce, String> {
-  List<Ecommerce> findByCustomerFullName(String customerFullName);
+  Page<Ecommerce> findByCustomerFullName(String customerFullName, PageRequest pageRequest);
 
   @Query("{\"terms\": {\"day_of_week\": [\"?0\"]}}")
   List<Ecommerce> findByDayOfWeek(List<String> days);
