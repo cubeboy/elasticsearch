@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EcommerceService {
-  private final EcommerceRepository ecommerceRepository;
-//  private final TemplateRepository ecommerceRepository;
+//  private final EcommerceRepository ecommerceRepository;
+  private final TemplateRepository ecommerceRepository;
 
   public List<Ecommerce> findByName(String name) {
 //    return ecommerceRepository.findByCustomerFullName(name);
@@ -24,7 +24,9 @@ public class EcommerceService {
     result = ecommerceRepository.findByCustomerFullName(name, PageRequest.of(0, 10));
     log.info("Ecommerce result.TotalElements ==> {}", result.getTotalElements());
     log.info("Ecommerce result.TotalPages ==> {}", result.getTotalPages());
-    log.info("Ecommerce result ==> {}", result.getContent());
+    log.info("Ecommerce result.Pageable ==> {}", result.getPageable());
+    log.info("Ecommerce result.Number ==> {}", result.getNumber());
+    log.info("Ecommerce result.Size ==> {}", result.getSize());
     return result.getContent();
   }
 

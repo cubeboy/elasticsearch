@@ -31,8 +31,8 @@ public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
     return RestClients.create(clientConfiguration).rest();
   }
   @Bean
-  public ElasticsearchRestTemplate elasticsearchTemplate(RestHighLevelClient client) {
-    return new ElasticsearchRestTemplate(client);
+  public ElasticsearchRestTemplate elasticsearchRestTemplate(RestHighLevelClient client, EntityMapper entityMapper) {
+    return new ElasticsearchRestTemplate(client, entityMapper);
   }
   @Bean
   @Override

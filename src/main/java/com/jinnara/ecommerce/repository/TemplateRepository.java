@@ -2,9 +2,7 @@ package com.jinnara.ecommerce.repository;
 
 import com.jinnara.ecommerce.repository.entity.Ecommerce;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHits;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
