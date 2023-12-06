@@ -6,6 +6,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @Document(indexName = "kibana_sample_data_ecommerce", type = "_doc", createIndex = false)
 public class Ecommerce {
@@ -21,6 +24,9 @@ public class Ecommerce {
   @Field(name = "customer_id", type = FieldType.Keyword)
   private Long customerId;
 
-  @Field(name = "day_of_week", type = FieldType.Text)
+  @Field(name = "day_of_week", type = FieldType.Keyword)
   private String dayOfWeek;
+
+  @Field(name = "products", type = FieldType.Object, includeInParent = true)
+  private List<Product> products;
 }

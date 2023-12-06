@@ -29,6 +29,7 @@ public class EcommerceService {
   }
 
   public List<Ecommerce> findByDayOfWeeks(List<String> days) {
-    return ecommerceRepository.findByDayOfWeek(days);
+    return ecommerceRepository.findByDayOfWeekIn(days, PageRequest.of(0, 10))
+        .getContent();
   }
 }

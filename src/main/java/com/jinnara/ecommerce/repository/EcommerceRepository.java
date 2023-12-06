@@ -13,6 +13,10 @@ import java.util.List;
 public interface EcommerceRepository extends ElasticsearchRepository<Ecommerce, String> {
   Page<Ecommerce> findByCustomerFullName(String customerFullName, PageRequest pageRequest);
 
+  Page<Ecommerce> findByDayOfWeekIn(List<String> days, PageRequest pageRequest);
+
   @Query("{\"terms\": {\"day_of_week\": [\"?0\"]}}")
   List<Ecommerce> findByDayOfWeek(List<String> days);
+
+
 }
