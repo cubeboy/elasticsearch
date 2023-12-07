@@ -18,7 +18,7 @@ public class EcommerceService {
 //  private final EcommerceRepository ecommerceRepository;
   private final TemplateRepository ecommerceRepository;
 
-  public List<Ecommerce> findByName(String name) {
+  public Page<Ecommerce> findByName(String name) {
 //    return ecommerceRepository.findByCustomerFullName(name);
     Page<Ecommerce> result;
     result = ecommerceRepository.findByCustomerFullName(name, PageRequest.of(0, 10));
@@ -27,11 +27,10 @@ public class EcommerceService {
     log.info("Ecommerce result.Pageable ==> {}", result.getPageable());
     log.info("Ecommerce result.Number ==> {}", result.getNumber());
     log.info("Ecommerce result.Size ==> {}", result.getSize());
-    return result.getContent();
+    return result;
   }
 
-  public List<Ecommerce> findByDayOfWeeks(List<String> days) {
-    return ecommerceRepository.findByDayOfWeekIn(days, PageRequest.of(0, 10))
-        .getContent();
+  public Page<Ecommerce> findByDayOfWeeks(List<String> days) {
+    return ecommerceRepository.findByDayOfWeekIn(days, PageRequest.of(0, 10));
   }
 }

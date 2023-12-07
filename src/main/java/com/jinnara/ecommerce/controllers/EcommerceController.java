@@ -1,5 +1,7 @@
 package com.jinnara.ecommerce.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jinnara.ecommerce.repository.entity.Ecommerce;
 import com.jinnara.ecommerce.services.EcommerceService;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +17,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EcommerceController {
   private final EcommerceService ecommerceService;
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
   @GetMapping("/find")
-  public List<Ecommerce> findCustomerFullName(@RequestParam String name) {
+  public JsonNode findCustomerFullName(@RequestParam String name) {
     log.info("Request Param name ==>> {}", name);
-    return ecommerceService.findByName(name);
+    return objectMapper.convertValue(
+        ecommerceService.findByName(name),
+        JsonNode.class);
   }
 
   @GetMapping("/findByDayOfWeeks")
-  public List<Ecommerce> findByDayOfWeeks(@RequestParam List<String> days) {
+  public JsonNode findByDayOfWeeks(@RequestParam List<String> days) {
     log.info("Request Param days ==>> {}", days);
-    return ecommerceService.findByDayOfWeeks(days);
+    return objectMapper.convertValue(
+        ecommerceService.findByDayOfWeeks(days),
+        JsonNode.class);
   }
 }

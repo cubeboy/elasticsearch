@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
-@Service
+@Repository
 @RequiredArgsConstructor
 public class TemplateRepository {
   private final ElasticsearchRestTemplate restTemplate;
@@ -30,7 +31,13 @@ public class TemplateRepository {
 
   public Page<Ecommerce> findByDayOfWeekIn(List<String> days, PageRequest pageRequest){
     NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-        .withQuery(QueryBuilders.termsQuery("day_of_week", days))
+        .withQuery(
+            QueryBuilders
+                .boolQuery()
+                .filter(QueryBuilders.termsQuery("day_of_week", days))
+        )
+//        .withQuery(QueryBuilders.termsQuery("day_of_week", days))
+//        .withFilter(QueryBuilders.termsQuery("day_of_week", days))
         .withPageable(pageRequest)
         .build();
     return restTemplate.queryForPage(searchQuery, Ecommerce.class);
