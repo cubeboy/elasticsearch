@@ -50,5 +50,6 @@ public class EcommerceRepositoryTests {
     List<Ecommerce> ecommerceList = ecommerceRepository.findByDayOfWeekIn(days);
     assertTrue("Find findByDaysOfWeek", ecommerceList.size() > 0);
     log.info("findByDayOfWeekIn result ==> {}", ecommerceList.size());
+    log.info("findByDayOfWeekIn result ==> {}", ecommerceList);
   }
 }

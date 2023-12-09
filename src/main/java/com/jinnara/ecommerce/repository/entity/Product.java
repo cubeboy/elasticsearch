@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
-  private String _id;
+  private String id;
   private String category;
-  private String product_name;
-  private Long product_id;
+  private String productName;
+  private Long productId;
 }

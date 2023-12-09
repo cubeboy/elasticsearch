@@ -7,10 +7,10 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Ecommerce {
-  private String _id;
-  private String customer_full_name;
+  private String id;
+  private String customerFullName;
   private String [] category;
-  private Long customer_id;
-  private String day_of_week;
+  private Long customerId;
+  private String dayOfWeek;
   private List<Product> products;
 }

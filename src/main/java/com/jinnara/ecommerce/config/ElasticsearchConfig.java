@@ -3,6 +3,9 @@ package com.jinnara.ecommerce.config;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RestClient;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +23,9 @@ public class ElasticsearchConfig {
 
   @Bean
   public RestClientTransport restClientTransport(RestClient restClient) {
-    return new RestClientTransport(restClient, new JacksonJsonpMapper());
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+    return new RestClientTransport(restClient, new JacksonJsonpMapper(mapper));
   }
 
   @Bean
