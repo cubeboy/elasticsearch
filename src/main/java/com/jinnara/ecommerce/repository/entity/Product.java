@@ -1,17 +1,13 @@
 package com.jinnara.ecommerce.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
-  @Field(name = "_id", type = FieldType.Text)
-  private String id;
-  @Field(name = "category", type = FieldType.Text)
+  private String _id;
   private String category;
-  @Field(name = "product_name", type = FieldType.Text)
-  private String productName;
-  @Field(name = "product_id", type = FieldType.Long)
-  private Long productId;
+  private String product_name;
+  private Long product_id;
 }
