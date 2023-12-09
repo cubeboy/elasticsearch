@@ -2,6 +2,7 @@ package com.jinnara.ecommerce.repository;
 
 import com.jinnara.ecommerce.config.ElasticsearchConfig;
 import com.jinnara.ecommerce.repository.entity.Ecommerce;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -14,8 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.springframework.test.util.AssertionErrors.assertNotNull;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
+import static org.springframework.test.util.AssertionErrors.*;
 
 @SpringBootTest(classes = {EcommerceRepository.class})
 @ExtendWith(SpringExtension.class)
@@ -32,10 +32,8 @@ public class EcommerceRepositoryTests {
   @Test
   public void contextInfo() {
     List.of(context.getBeanDefinitionNames())
-        .forEach(name -> {
-          log.info("bean name ==> {}", name);
-        });
-    assertNotNull("Require ecommerceRepository", ecommerceRepository);
+        .forEach(name -> log.info("bean name ==> {}", name));
+    Assertions.assertNotNull(ecommerceRepository, "Require ecommerceRepository");
   }
 
   @Test
@@ -48,7 +46,7 @@ public class EcommerceRepositoryTests {
   @Test void testFindByDayOfWeekIn() throws Exception {
     List<String> days = List.of("Sunday", "Monday");
     List<Ecommerce> ecommerceList = ecommerceRepository.findByDayOfWeekIn(days);
-    assertTrue("Find findByDaysOfWeek", ecommerceList.size() > 0);
+    Assertions.assertFalse(ecommerceList.isEmpty(), "Find findByDaysOfWeek");
     log.info("findByDayOfWeekIn result ==> {}", ecommerceList.size());
     log.info("findByDayOfWeekIn result ==> {}", ecommerceList);
   }
