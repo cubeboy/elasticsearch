@@ -33,7 +33,10 @@ public class EcommerceRepository {
     if(response.hits().hits().isEmpty()) {
       throw new Exception("Not Found Commerce data");
     }
-    return response.hits().hits().get(0).source();
+    return response.hits().hits().stream()
+        .findFirst()
+        .orElseThrow()
+        .source();
   }
 
   public List<Ecommerce> findByDayOfWeekIn(List<String> days) throws Exception {
@@ -64,11 +67,49 @@ public class EcommerceRepository {
         request,
         Ecommerce.class
     );
+    assert response.hits().total() != null;
     log.info("SearchResponse<Product> total ====>>>> {}", response.hits().total().value());
     log.info("SearchResponse<Product> size ====>>>> {}", response.hits().hits().size());
     return response.hits().hits().stream()
         .map(Hit::source)
         .collect(Collectors.toList());
+  }
 
+  public List<Ecommerce> findByCustomerFullName(String name, String excludeDayOfWeek)
+      throws Exception {
+    SearchRequest request = new SearchRequest.Builder()
+        .index(INDEX_NAME)
+        .from(0)
+        .size(10000)
+        .query(q -> q
+            .bool(b -> b
+                .must(m -> m
+                    .match(mt -> mt
+                        .field("customer_full_name")
+                        .query(name)
+                    )
+                )
+                .mustNot(mn -> mn
+                    .term(t -> t
+                        .field("day_of_week")
+                        .value(excludeDayOfWeek)
+                    )
+                )
+            )
+        )
+        .build();
+    log.info("SearchRequest ===>>> {}", request);
+    SearchResponse<Ecommerce> response = esClient.search(
+        request,
+        Ecommerce.class
+    );
+    assert response.hits().total() != null;
+    log.info("SearchResponse<Product> total ====>>>> {}", response.hits().total().value());
+    log.info("SearchResponse<Product> size ====>>>> {}", response.hits().hits().size());
+    log.info("SearchResponse<Product> ====>>>> {}", response);
+
+    return response.hits().hits().stream()
+        .map(Hit::source)
+        .collect(Collectors.toList());
   }
 }

@@ -50,4 +50,14 @@ public class EcommerceRepositoryTests {
     log.info("findByDayOfWeekIn result ==> {}", ecommerceList.size());
     log.info("findByDayOfWeekIn result ==> {}", ecommerceList);
   }
+
+  @Test
+  public void testFindByCustomerFullNameAndExcludeWeek() throws Exception {
+    String name = "reyes";
+    String excludeDayOfWeek = "Saturday";
+    List<Ecommerce> ecommerceList = ecommerceRepository.findByCustomerFullName(name, excludeDayOfWeek);
+    Assertions.assertFalse(ecommerceList.isEmpty(), "Not Found ecommerce");
+    log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList.size());
+    log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList);
+  }
 }
