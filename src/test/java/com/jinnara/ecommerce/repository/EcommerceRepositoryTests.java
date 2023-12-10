@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.test.util.AssertionErrors.*;
 
@@ -56,6 +57,16 @@ public class EcommerceRepositoryTests {
     String name = "reyes";
     String excludeDayOfWeek = "Saturday";
     List<Ecommerce> ecommerceList = ecommerceRepository.findByCustomerFullName(name, excludeDayOfWeek);
+    Assertions.assertFalse(ecommerceList.isEmpty(), "Not Found ecommerce");
+    log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList.size());
+    log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList);
+  }
+
+  @Test
+  public void testFindByCustomerFullNameAndExcludeWeekToMap() throws Exception {
+    String name = "reyes";
+    String excludeDayOfWeek = "Saturday";
+    List<Map<String, Object>> ecommerceList = ecommerceRepository.findByCustomerFullNameToMap(name, excludeDayOfWeek);
     Assertions.assertFalse(ecommerceList.isEmpty(), "Not Found ecommerce");
     log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList.size());
     log.info("FindByCustomerFullNameAndExcludeWeek result ==> {}", ecommerceList);
