@@ -1,0 +1,55 @@
+{
+  "mappings": {
+    "properties": {
+      "base_price": {
+        "type": "half_float"
+      },
+      "base_unit_price": {
+        "type": "half_float"
+      },
+      "category": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "created_on": {
+        "type": "date"
+      },
+      "discount_amount": {
+        "type": "half_float"
+      },
+      "discount_percentage": {
+        "type": "half_float"
+      },
+      "manufacturer": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "min_price": {
+        "type": "half_float"
+      },
+      "price": {
+        "type": "half_float"
+      },
+      "product_id": {
+        "type": "long"
+      },
+      "product_name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        },
+        "analyzer": "english"
+      }
+    }
+  }
+}
