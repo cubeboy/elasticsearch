@@ -46,8 +46,8 @@ public class ElasticQueryTest {
         .index("kibana_sample_data_ecommerce")
         .query(q -> q
             .bool(b -> b
-                .must(param.getQueryCustomerFullName())
-                .mustNot(param.getQueryDayOfWeeks())
+                .must(param.getMatchQueryList())
+                .mustNot(param.getTermsQueryList())
             )
         ).build();
     log.info("SearchRequest ==>> {}", request);
